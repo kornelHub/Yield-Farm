@@ -13,7 +13,7 @@ contract Farm is AccessControl {
 
     uint256 public tvl; // Total value locked
     address[] public arrayWithStakers;
-    uint256 public constant limitOfTokenReward = 1000000000000000000000000000; //1_000_000_000
+    uint256 public constant limitOfTokenReward = 1000000000000000000000; //1_000
     uint256 public constant rewardPerPerdiod = 10000000000000000000; //10
     uint256 public mintedReward = 0;
 
@@ -74,7 +74,8 @@ contract Farm is AccessControl {
         }
     }
 
-    function getIndexByElement(address _element) private view returns(uint256) {
+    //@dev function is public for testing purposes, in deployment should be changed to private
+    function getIndexByElement(address _element) public view returns(uint256) {
         for(uint256 i=0; i<arrayWithStakers.length; i++) {
             if (arrayWithStakers[i] == _element) {
                 return i;

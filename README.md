@@ -1,13 +1,14 @@
-# Sample Hardhat Project
+# Yield Farm
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
+## Coverage
+```
+------------------|----------|----------|----------|----------|----------------|
+File              |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+------------------|----------|----------|----------|----------|----------------|
+ contracts\       |      100 |     87.5 |      100 |      100 |                |
+  Farm.sol        |      100 |    86.36 |      100 |      100 |                |
+  RewardToken.sol |      100 |      100 |      100 |      100 |                |
+------------------|----------|----------|----------|----------|----------------|
+All files         |      100 |     87.5 |      100 |      100 |                |
+------------------|----------|----------|----------|----------|----------------|
 ```

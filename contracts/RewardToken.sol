@@ -15,8 +15,4 @@ contract RewardToken is ERC20, AccessControl {
     function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
         _mint(to, amount);
     }
-
-    function getMinterRole() external pure returns(bytes32) {
-        return MINTER_ROLE;
-    }
 }

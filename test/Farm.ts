@@ -176,6 +176,21 @@ describe("Farm contract", async function () {
                 `AccessControl: account ${(acc[0].address).toLowerCase()} is missing role 0xc002a6b5f9f56101ba6339b1b95d171fadf6e41e005b91c80d686aef7516e759`
                 );
         });
+
+        it("FAIL - distributed all tokens", async function () {
+            const { farmContract, owner, acc } = await loadFixture(deployFarm);
+            const depositAmount = ethers.utils.parseEther("0.5");
+            const depositAmount2 = ethers.utils.parseEther("1");
+
+            await farmContract.connect(acc[0]).deposit({ 'value': depositAmount });
+            await farmContract.connect(acc[1]).deposit({ 'value': depositAmount2 });
+
+            for(let i=0; i<100; i++){
+                await farmContract.connect(owner).distrubuteRewards();
+            };
+
+            await expect(farmContract.connect(owner).distrubuteRewards()).to.be.revertedWith("All tokens has beed distributed");
+        });
     });
 
     describe("withdraw()", async function () {
@@ -241,6 +256,14 @@ describe("Farm contract", async function () {
             expect(await farmContract.addressToDepositedAmount(acc[0].address)).to.be.equal(0);
             expect(await farmContract.tvl()).to.be.equal(0);
             expect(await farmContract.getArrayWithStakersLength()).to.be.equal(0);
+        });
+    });
+
+    describe("getIndexByElement()", async function () {
+        it("FAIL - element not in address", async function () {
+            const { farmContract, owner, acc } = await loadFixture(deployFarm);
+
+            await expect(farmContract.getIndexByElement(acc[0].address)).to.be.revertedWith("Element not in array");
         });
     });
 });
